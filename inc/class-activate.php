@@ -19,10 +19,11 @@ class NeuWiki_Activate {
 	public static function activate() {
 		
 		require_once plugin_dir_path( __FILE__ ) . 'class-post-types.php';
+		require_once dirname( plugin_dir_path( __FILE__ ) ) . '/admin/class-meta-boxes.php';
 		
-		$plugin_slug = strtolower( str_replace( ' ', '-', 'Katalyst Wiki' ) );
+		$plugin_slug = strtolower( str_replace( ' ', '-', 'NeuWiki' ) );
 		
-		$neuwiki_post_types = new NeuWiki_Post_Types( $plugin_slug );
+		$neuwiki_post_types = new NeuWiki_Post_Types( $plugin_slug, false );
 		$neuwiki_post_types->register_wiki();
 		$neuwiki_post_types->register_category_tax();
 		$neuwiki_post_types->register_tag_tax();
