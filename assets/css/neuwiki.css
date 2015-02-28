@@ -1,0 +1,19 @@
+#neuwiki_toc {
+	
+	float: right;
+	
+	
+}
+
+.toc-title {
+	
+	font-weight: bold;
+	text-align: center;
+	
+}
+
+#neuwiki_toc ul {
+	
+	list-style: none;
+	
+}
