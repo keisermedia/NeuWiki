@@ -59,6 +59,7 @@ class NeuWiki {
 		$this->define_public_hooks();
 		$this->register_post_types();
 		$this->register_capabilities();
+		$this->register_shortcodes();
 		$this->activate_modules();
 
 	}
@@ -79,6 +80,7 @@ class NeuWiki {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-public.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'inc/class-post-types.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'inc/class-capabilities.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'inc/class-shortcodes.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'inc/functions.php';
 
 		$this->loader = new NeuWiki_Loader();
@@ -191,6 +193,20 @@ class NeuWiki {
 		$this->loader->add_action( 'map_meta_cap', $neuwiki_capabilities, 'map_meta_cap', 10, 4 );
 		$this->loader->add_action( 'admin_init', $neuwiki_capabilities, 'add_capabilities' );
 		
+		
+	}
+
+	/**
+	 * Process shortcodes
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function register_shortcodes() {
+
+		$neuwiki_shortcodes = new NeuWiki_Shortcodes( $this->get_plugin_info( 'slug' ), $this->get_plugin_info( 'version' ) );
+		
+		add_shortcode( 'neuwiki_link', array( $neuwiki_shortcodes, 'internal_link' ) );
 		
 	}
 	

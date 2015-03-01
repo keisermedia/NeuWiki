@@ -119,6 +119,8 @@ class NeuWiki_Admin {
 		
 		remove_meta_box( 'commentstatusdiv', 'neuwiki', 'normal' );
 		
+		add_action( 'save_post', array( new NeuWiki_Meta_Boxes, 'save_meta_boxes' ) );
+		
 	}
 	
 	/**

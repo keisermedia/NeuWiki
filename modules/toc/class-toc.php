@@ -60,7 +60,7 @@ class NeuWiki_Table_of_Contents {
 	 */
 	private function extract_headings( $content, $limit ) {
 		
-		preg_match_all('/(<h([1-6]{1})[^>]*>).*<\\/h\\2>/msuU', $content, $headings, PREG_SET_ORDER);
+		preg_match_all('/(<h([1-6]{1})[^>]*>)(.*)<\\/h\\2>/msuU', $content, $headings, PREG_SET_ORDER);
 		
 		return $headings;
 		
@@ -111,7 +111,7 @@ class NeuWiki_Table_of_Contents {
 			}
 			
 			// List Heading
-			$toc .= '			<a href="#' . md5($headings[$i][0]) . '"><span class="toc-' . ( $current_depth - $numbered_min + 1 ) . '">';
+			$toc .= '			<a href="#' . urlencode($headings[$i][3]) . '"><span class="toc-' . ( $current_depth - $numbered_min + 1 ) . '">';
 			
 			for( $j = $numbered_min; $j < $current_depth; $j++ ) {
 				
@@ -220,8 +220,10 @@ class NeuWiki_Table_of_Contents {
 		
 		$link_class	= 'neuwiki-header';
 		
+		$content = html_entity_decode($content);
+		
 		foreach( $headings as $heading )
-			$content = str_replace( $heading[0], '<a name="' . md5($heading[0]) . '" class="' . $link_class . '">' . $heading[0] . '</a>', $content);
+			$content = str_replace( html_entity_decode($heading[0]), '<h' . $heading[2] . ' id="' . urlencode($heading[3]) . '" class="' . $link_class . '">' . $heading[3] . '</h' . $heading[2] . '>', $content);
 		
 		$toc = $this->generate_toc( $headings, $settings );
 		

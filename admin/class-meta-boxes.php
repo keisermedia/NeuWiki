@@ -54,6 +54,9 @@ class NeuWiki_Meta_Boxes {
 	public function toc( $post ) {
 		
 		$this->check_nonce();
+		
+		$neuwiki_meta = get_post_meta( $post->ID, '_neuwiki', true );
+		
 		include( 'partials/meta-box-toc.php' );
 		
 	}
@@ -107,6 +110,9 @@ class NeuWiki_Meta_Boxes {
 			
 			if( in_array( $_POST['neuwiki']['toc'], array( 'default', 'disable', 'force' ) ) )
 				$this->settings['toc'] = $_POST['neuwiki']['toc'];
+			
+			else
+				$this->settings['toc'] = 'default';
 			
 		}
 		
