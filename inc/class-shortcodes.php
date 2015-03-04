@@ -56,7 +56,7 @@ final class NeuWiki_Shortcodes {
 		
 		if( ( null !== $page ) && isset($section[1]) )
 			$href = rtrim( $href, '/' ) . '#' . urlencode( htmlentities($section[1]) );
-		//return '<pre>' . print_r($section, true) . '</pre>';
+		
 		return sprintf( '<a href="%s" target="_blank">%s</a>', $href, $title );
 		
 	}

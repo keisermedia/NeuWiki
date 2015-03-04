@@ -159,6 +159,8 @@ class NeuWiki {
 		$this->loader->add_action( 'wp_enqueue_scripts', $neuwiki_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $neuwiki_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'template_redirect', $neuwiki_public, 'redirect_archive' );
+		$this->loader->add_action( 'the_content', $neuwiki_public, 'build_wiki_page' );
+		$this->loader->add_action( 'neuwiki_pre_build_page', $neuwiki_public, 'article_nav' );
 
 	}
 

@@ -52,7 +52,7 @@ class NeuWiki_Public {
 		$this->slug = $slug;
 		$this->version = $version;
 		
-		$this->load_dependencies();
+		$this->load_dependencies(); 
 		
 	}
 	
@@ -91,6 +91,11 @@ class NeuWiki_Public {
 
 	}
 	
+	/**
+	 * Redirects archive to a specific page.
+	 * 
+	 * @since 1.0.0
+	 */
 	public function redirect_archive() {
 		global $wp_query;
 		
@@ -99,6 +104,28 @@ class NeuWiki_Public {
 		if( isset($settings['wiki_front_page']) && 'default' !== $settings['wiki_front_page'] && is_post_type_archive( 'neuwiki' ) )
 			$wp_query = new WP_Query( array( 'page_id' => $settings['wiki_front_page'] ) );
 			
+	}
+	
+	public function build_wiki_page( $content ) {
+		
+		if( 'neuwiki' !== get_post_type() || !is_single() )
+			return $content;
+		
+		ob_start();
+		
+		do_action( 'neuwiki_pre_build_page' );
+		
+		echo $content;
+		
+		do_action( 'neuwiki_post_build_page' );
+		
+		return ob_get_flush();
+		
+	}
+	
+	public function article_nav() {
+		
+		neuwiki_get_template_part( 'article', 'navigation' );
 		
 	}
 	
