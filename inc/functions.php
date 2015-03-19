@@ -34,7 +34,7 @@ function neuwiki_get_option( $option, $default = null ) {
 
 function neuwiki_get_template_part( $slug, $name = null, $load = true ) {
 	
-	do_action( "kvp_get_template_part_{$slug}", $slug, $name );
+	do_action( "neuwiki_get_template_part_{$slug}", $slug, $name );
 	
 	$name = (string) $name;
 	$template = ( '' !== $name ) ? "{$slug}-{$name}.php" : "{$slug}.php";

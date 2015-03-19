@@ -113,13 +113,7 @@ class NeuWiki_Public {
 		
 		ob_start();
 		
-		do_action( 'neuwiki_pre_build_page' );
-		
-		echo $content;
-		
-		do_action( 'neuwiki_post_build_page' );
-		
-		return ob_get_flush();
+		return apply_filters( 'neuwiki_pre_build_page', '' ) . $content . apply_filters( 'neuwiki_post_build_page', '' );
 		
 	}
 	
